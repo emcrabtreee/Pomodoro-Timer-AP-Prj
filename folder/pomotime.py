@@ -78,6 +78,7 @@ def displayTime(timer):
     time.sleep(1)
         
 # Work function --> 25 minutes
+# set to 5 seconds for video
 def work():
     timer = 25 * 60 # 25 minutes --> seconds
     quote_timer = 25 * 60
@@ -90,7 +91,7 @@ def work():
         timer -= 1
 
         while quote_timer >= 0:
-            if quote_timer == 25*60:
+            if quote_timer == 25 * 60:
                 RandomQuote(n)
             quote_timer -= 1
 
@@ -116,7 +117,7 @@ def short_break():
 def long_break():
     timer = 10 * 60 # 10 minutes --> seconds
     n = 1 # only displays the quote once
-    quote_timer = 10*60
+    quote_timer = 10 *60
     while timer >= 0:
         displayTime(timer)
         if timer == 0:
@@ -151,6 +152,8 @@ for i in range(4):
 ######################################
 ######################################
 
+pomo_schedule = "-------POMODORO METHOD SCHEDULE-------\nWORK: 25 mins\n--\nSHORT BREAK: 5 mins\n--\nWORK:25 mins\n--\nSHORT BREAK: 5 mins\n--\nWORK: 25 mins\n--\nLONG BREAK: 10 mins\n--\nREPEAT FROM START"
+
 # GUI using tk/tkinter
 # this will be the tkinter set up
 window = Tk()
@@ -165,17 +168,19 @@ img = Image.open('blue_bg.png') # setting image as background
 bg = ImageTk.PhotoImage(img)
 canvas.create_image(0, 0, image=bg, anchor="nw")
 
-# Variables to keep track and display (also setting them to strs to)
+# Variables to keep track and display (also setting them to strs so they can be displayed)
 Min=StringVar()
 Sec=StringVar()
 Quo=StringVar()
 Name=StringVar()
+Schedule=StringVar()
 
 # set default time/ quote/ name
 Min.set("25")
 Sec.set("00")
 Quo.set("")
 Name.set(name)
+Schedule.set(pomo_schedule)
 
 # label to tell user to read terminal with the instructions
 canvas.create_text(500, 75, text = "Read your terminal before starting!!!")
@@ -205,6 +210,10 @@ name_label.place(x=295,y=20)
 # where quote will be displayed 
 quote_label = tk.Label(window, textvariable=Quo, font=("arial", 16), width=16, height=14, borderwidth=3, relief="ridge")
 quote_label.place(x=735,y=80)
+
+# Schedule display label
+min_label = tk.Label(window,textvariable=Schedule, font=("arial", 6), width=30, height=15, borderwidth=3, relief="groove")
+min_label.place(x=555,y=335)
 
 # Buttons
 # work button
