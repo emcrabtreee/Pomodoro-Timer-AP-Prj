@@ -29,7 +29,7 @@
 # https://docs.python.org/3/library/textwrap.html © Copyright 2001-2022, Python Software Foundation.
 
 # Background Image Citation:
-# Created by code creater(me) through canva
+# Created by code creater(me) through canva(canva.com)
 
 # Inspirational quotes data source citation:
 # Bright Culture. “202 Motivational Quotes for Students - Get Motivated While Studying.” Bright Culture, 16 Jan. 
@@ -41,13 +41,13 @@ import random
 import time
 import tkinter as tk
 from tkinter import *
-from tkinter import messagebox
-from PIL import Image, ImageTk 
+from tkinter import messagebox # end session messageboxes
+from PIL import Image, ImageTk # used to upload image to tk bg
 import textwrap # used for textwrapping the quote in label
 
 # takes random quote from list(quotes.txt) and category from quotes2.txt
 def RandomQuote(n):
-    mylines = []
+    mylines = [] 
     category = []
     random_line = random.randint(1,202) # picks random number from 1 to 202            
     # Open quotes.txt and read in quotes
@@ -57,12 +57,12 @@ def RandomQuote(n):
     # Open quotes2.txt and read in categories( 0 and 1 )
     with open ('quotes2.txt', encoding='utf-8') as myfile: 
         for myline in myfile:                
-            category.append(myline)
+            category.append(myline) # sues same line that is the random quote
     global quote_choice  
-    quote_choice = str(mylines[random_line])
+    quote_choice = str(mylines[random_line]) # assign random quote variable
     global quote_category
-    quote_category = str(category[random_line])
-    quote_category = int(quote_category) # set variable to int
+    quote_category = str(category[random_line]) # assign random quote's category to variable
+    quote_category = int(quote_category) # set variable to int 
     quote_choice = textwrap.fill(quote_choice, 18) # sets limit of 18 characters for quote
     # call the display function
     displayQuotes(quote_choice, quote_category, n)
@@ -75,10 +75,10 @@ def displayQuotes(quote_choice, quote_category, n):
         quote_label.config(bg= "#b6e6a5", fg= "#53bd65") # makes green if philosophical
 
     for i in range (n): # n is used to limit it from looping more than 1 time(since thats all that is needed)
-        Quo.set(quote_choice)
+        Quo.set(quote_choice) # set quote label text variable to tje random quote
         # update screen now
         window.update()
-        time.sleep(1)
+        time.sleep(1) # 1 second delay in display
     
 # display timer function
 def displayTime(timer):
@@ -96,9 +96,10 @@ def work():
     quote_timer = 25 * 60
     n = 1 # only displays the quote once
     while timer >= 0:
+        # call display timer fucntion to update timer while its running
         displayTime(timer)
         if timer == 0:
-            messagebox.showinfo("Pomodoro Timer Alert", "Work Done\nGreat job, break time!\nClick Break Button")
+            messagebox.showinfo("Pomodoro Timer Alert", "Work Done\n------------------------\nGreat job, break time!\nClick Break Button")
         # subtract second from timer while true
         timer -= 1
 
@@ -111,11 +112,12 @@ def work():
 def short_break():
     timer = 5*60 # 5 minutes --> seconds
     n = 1 # only displays the quote once
-    quote_timer = 5*60
+    quote_timer = 5*60 
     while timer >= 0:
+        # call display timer fucntion to update timer while its running
         displayTime(timer)
         if timer == 0:
-            messagebox.showinfo("Pomodoro Timer Alert", "Short break Done \nTime to get to work!\nClick Work Button")
+            messagebox.showinfo("Pomodoro Timer Alert", "Short break Done\n--------------------------\nTime to get to work!\nClick Work Button")
         # subtract second from timer while true
         timer -= 1
 
@@ -131,9 +133,10 @@ def long_break():
     n = 1 # only displays the quote once
     quote_timer = 10 * 60
     while timer >= 0:
+        # call display timer fucntion to update timer while its running
         displayTime(timer)
         if timer == 0:
-            messagebox.showinfo("Pomodoro Timer Alert", "Long break done \nTime to get to work!\nClick Work Button")
+            messagebox.showinfo("Pomodoro Timer Alert", "Long break done\n------------------------\nTime to get to work!\nClick Work Button")
         # subtract second from timer while true
         timer -= 1
 
@@ -165,6 +168,7 @@ for i in range(4):
 ######################################
 ######################################
 
+# pomo schedule to be displayed onto tk window
 pomo_schedule = "-------POMODORO METHOD SCHEDULE-------\nWORK: 25 mins\n--\nSHORT BREAK: 5 mins\n--\nWORK:25 mins\n--\nSHORT BREAK: 5 mins\n--\nWORK: 25 mins\n--\nLONG BREAK: 10 mins\n--\nREPEAT FROM START"
 
 # GUI using tk/tkinter
@@ -181,14 +185,14 @@ img = Image.open('blue_bg.png') # setting image as background
 bg = ImageTk.PhotoImage(img)
 canvas.create_image(0, 0, image=bg, anchor="nw")
 
-# Variables to keep track and display (also setting them to strs so they can be displayed)
+# Variables to keep track and display (setting them to strs so they can be displayed)
 Min=StringVar()
 Sec=StringVar()
 Quo=StringVar()
 Name=StringVar()
 Schedule=StringVar()
 
-# set default time/ quote/ name
+# set default time/ quote/ name/ schedule
 Min.set("25")
 Sec.set("00")
 Quo.set("")
@@ -224,11 +228,11 @@ name_label.place(x=295,y=20)
 quote_label = tk.Label(window, textvariable=Quo, font=("arial", 16), width=16, height=14, borderwidth=3, relief="ridge")
 quote_label.place(x=735,y=80)
 
-# Schedule display label
-min_label = tk.Label(window,textvariable=Schedule, font=("arial", 6), width=30, height=15, borderwidth=3, relief="groove")
-min_label.place(x=555,y=335)
+# Pomo Schedule display label
+pomosch_label = tk.Label(window,textvariable=Schedule, font=("arial", 6), width=30, height=15, borderwidth=3, relief="groove")
+pomosch_label.place(x=555,y=335)
 
-# Buttons
+# Buttons ###################
 # work button
 work_button = Button(window, text='Work', font=("Fixedsys", 15),command= work, width=20, height=3, borderwidth=3, relief="ridge")
 work_button.place(x = 60, y = 85)
@@ -241,7 +245,7 @@ shortb_button.place(x = 60, y = 210)
 longb_button = Button(window, text='Long Break', font=("Fixedsys", 15),command= long_break, width=20, height=3, borderwidth=3, relief="ridge")
 longb_button.place(x = 60, y = 335)
 
-# end main loop
+# end window main loop
 window.mainloop()
 
 # quotes.txt contents #######################################################
@@ -470,11 +474,11 @@ window.mainloop()
 # 0
 # 1
 # 1
-# 1
-# 1
+# 0
 # 1
 # 1
 # 0
+# 0
 # 1
 # 1
 # 1
@@ -488,9 +492,9 @@ window.mainloop()
 # 0
 # 1
 # 0
-# 1
 # 0
 # 0
+# 0
 # 1
 # 0
 # 1
@@ -504,11 +508,11 @@ window.mainloop()
 # 1
 # 0
 # 1
-# 0
-# 0
 # 1
 # 0
 # 1
+# 1
+# 1
 # 0
 # 0
 # 1
@@ -591,8 +595,8 @@ window.mainloop()
 # 1
 # 0
 # 0
-# 1
 # 0
+# 0
 # 1
 # 0
 # 0
@@ -617,10 +621,10 @@ window.mainloop()
 # 0
 # 0
 # 1
-# 0
 # 1
-# 0
+# 1
 # 0
+# 1
 # 1
 # 1
 # 1
@@ -640,16 +644,16 @@ window.mainloop()
 # 0
 # 1
 # 0
-# 0
 # 1
-# 0
+# 1
 # 1
+# 1
 # 0
 # 0
 # 1
 # 0
 # 1
-# 0
+# 1
 # 1
 # 0
 #############################################################################
