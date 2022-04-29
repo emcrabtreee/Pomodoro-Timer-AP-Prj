@@ -1,5 +1,5 @@
 # Pomodoro-Timer-lol
-Code and other files for my pomodoro timer is in the folder called folder
+Code and other files for my pomodoro timer(APCSP Create Task submittion Apr 2022) is in the folder called folder
 
 # UPDATE APR 29, 2022
 more small changes added but nothing big lol
